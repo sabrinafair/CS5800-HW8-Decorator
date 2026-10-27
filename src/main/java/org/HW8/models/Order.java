@@ -34,21 +34,28 @@ public class Order {
     }
 
     public void printReceipt(){
-        double totalCost = 0;
+
         System.out.println("-----------------------------------------");
         System.out.println("-----------------RECEIPT-----------------");
         System.out.println("-----------------------------------------");
         System.out.println("ORDER NUMBER: " + this.orderNumber);
         System.out.println("CUSTOMER: " + this.customer.getName());
         for(Food food: this.items){
-            totalCost += food.getPrice();
-            System.out.println("ITEM: " +food.getItemName() + " " + food.getPrice());
+            System.out.println("ITEM: " +food.getItemName() + " " + Math.round(food.getPrice() * 100.0) / 100.0);
         }
         System.out.println("-----------------------------------------");
 
-        System.out.println("TOTAL: " + totalCost);
+        System.out.println("TOTAL: " + this.getTotal());
         System.out.println("-----------------------------------------");
 
+    }
+
+    public double getTotal(){
+        double totalCost = 0;
+        for(Food food: this.items){
+            totalCost += food.getPrice();
+        }
+        return Math.round(totalCost * 100.0) / 100.0;
     }
 
     public int generateRandomNumber(){
